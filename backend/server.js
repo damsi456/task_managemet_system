@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(session({
   name: 'session',
   keys: [process.env.SESSION_SECRET],
-  maxAge: 24 * 60 * 60 * 1000, // 1 day
+  maxAge: 24 * 60 * 60 * 1000, 
 }));
 
 // Passport setup
