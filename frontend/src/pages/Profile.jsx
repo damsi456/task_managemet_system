@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -18,36 +19,39 @@ const Profile = () => {
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Profile</h2>
-      {user ? (
-        <div className="space-y-4 bg-white shadow p-4 rounded border">
-          <div>
-            <p className="text-sm text-gray-500">Name</p>
-            <p className="text-lg font-medium">{user.displayName}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Email</p>
-            <p className="text-lg font-medium">{user.emails?.[0].value}</p>
-          </div>
-          <div>
-            <img
-              src={user.photos?.[0].value}
-              alt="Profile"
-              className="rounded-full w-24 h-24 mt-2"
-            />
-          </div>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-          >
-            Logout
-          </button>
+    <>
+        <NavBar/>
+        <div className="p-6 max-w-lg mx-auto">
+        <h2 className="text-2xl font-bold mb-4">Profile</h2>
+        {user ? (
+            <div className="space-y-4 bg-white shadow p-4 rounded border">
+            <div>
+                <p className="text-sm text-gray-500">Name</p>
+                <p className="text-lg font-medium">{user.displayName}</p>
+            </div>
+            <div>
+                <p className="text-sm text-gray-500">Email</p>
+                <p className="text-lg font-medium">{user.emails?.[0].value}</p>
+            </div>
+            <div>
+                <img
+                src={user.photos?.[0].value}
+                alt="Profile"
+                className="rounded-full w-24 h-24 mt-2"
+                />
+            </div>
+            <button
+                onClick={handleLogout}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+            >
+                Logout
+            </button>
+            </div>
+        ) : (
+            <p>Loading profile...</p>
+        )}
         </div>
-      ) : (
-        <p>Loading profile...</p>
-      )}
-    </div>
+    </>
   );
 };
 

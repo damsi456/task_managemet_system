@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 import { useNavigate, Link } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -31,43 +32,46 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold">Dashboard</h2>
-        <button onClick={handleLogout} className="text-sm bg-red-500 text-white px-3 py-1 rounded">
-          Logout
-        </button>
-      </div>
+    <>
+        <NavBar />
+        <div className="p-6">
+        <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-semibold">Dashboard</h2>
+            <button onClick={handleLogout} className="text-sm bg-red-500 text-white px-3 py-1 rounded">
+            Logout
+            </button>
+        </div>
 
-      {user && (
-        <div className="mb-6">
-          <h3 className="text-lg font-medium">Welcome, {user.displayName} 👋</h3>
-        </div>
-      )}
+        {user && (
+            <div className="mb-6">
+            <h3 className="text-lg font-medium">Welcome, {user.displayName} 👋</h3>
+            </div>
+        )}
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-white shadow p-4 rounded border">
-          <p className="text-sm text-gray-500">Total Tasks</p>
-          <p className="text-xl font-bold">{taskStats.total}</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+            <div className="bg-white shadow p-4 rounded border">
+            <p className="text-sm text-gray-500">Total Tasks</p>
+            <p className="text-xl font-bold">{taskStats.total}</p>
+            </div>
+            <div className="bg-yellow-100 shadow p-4 rounded border">
+            <p className="text-sm text-gray-700">Pending</p>
+            <p className="text-xl font-bold">{taskStats.pending}</p>
+            </div>
+            <div className="bg-blue-100 shadow p-4 rounded border">
+            <p className="text-sm text-gray-700">In Progress</p>
+            <p className="text-xl font-bold">{taskStats.inProgress}</p>
+            </div>
+            <div className="bg-green-100 shadow p-4 rounded border">
+            <p className="text-sm text-gray-700">Completed</p>
+            <p className="text-xl font-bold">{taskStats.done}</p>
+            </div>
         </div>
-        <div className="bg-yellow-100 shadow p-4 rounded border">
-          <p className="text-sm text-gray-700">Pending</p>
-          <p className="text-xl font-bold">{taskStats.pending}</p>
-        </div>
-        <div className="bg-blue-100 shadow p-4 rounded border">
-          <p className="text-sm text-gray-700">In Progress</p>
-          <p className="text-xl font-bold">{taskStats.inProgress}</p>
-        </div>
-        <div className="bg-green-100 shadow p-4 rounded border">
-          <p className="text-sm text-gray-700">Completed</p>
-          <p className="text-xl font-bold">{taskStats.done}</p>
-        </div>
-      </div>
 
-      <Link to="/tasks" className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition">
-        Go to Task Manager
-      </Link>
-    </div>
+        <Link to="/tasks" className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition">
+            Go to Task Manager
+        </Link>
+        </div>
+    </>
   );
 };
 

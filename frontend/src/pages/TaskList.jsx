@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 import { Link, useNavigate } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -81,85 +82,88 @@ const TaskList = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-bold">Task List</h2>
-        <div className="space-x-2">
-          <Link to="/tasks/add" className="bg-blue-600 text-white px-4 py-2 rounded">+ Add Task</Link>
-          <button onClick={downloadPDF} className="bg-green-600 text-white px-4 py-2 rounded">Download PDF</button>
+    <>
+    <NavBar />
+        <div className="p-6">
+        <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-bold">Task List</h2>
+            <div className="space-x-2">
+            <Link to="/tasks/add" className="bg-blue-600 text-white px-4 py-2 rounded">+ Add Task</Link>
+            <button onClick={downloadPDF} className="bg-green-600 text-white px-4 py-2 rounded">Download PDF</button>
+            </div>
         </div>
-      </div>
-      
-      <div className="mb-4 flex flex-wrap gap-2">
-        <div className="flex-1 min-w-[200px]">
-          <input
-            type="text"
-            placeholder="Search by title or assignee..."
-            className="w-full p-2 border rounded"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+        
+        <div className="mb-4 flex flex-wrap gap-2">
+            <div className="flex-1 min-w-[200px]">
+            <input
+                type="text"
+                placeholder="Search by title or assignee..."
+                className="w-full p-2 border rounded"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            </div>
+            <div>
+            <select
+                className="p-2 border rounded"
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+            >
+                <option value="">All Statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Done">Done</option>
+            </select>
+            </div>
         </div>
-        <div>
-          <select
-            className="p-2 border rounded"
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-          >
-            <option value="">All Statuses</option>
-            <option value="Pending">Pending</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Done">Done</option>
-          </select>
-        </div>
-      </div>
 
-      <table className="w-full border text-sm">
-        <thead className="bg-gray-100">
-          <tr>
-            <th 
-              className="p-2 border cursor-pointer" 
-              onClick={() => handleSort('title')}
-            >
-              Title
-              {sortConfig.key === 'title' && (
-                <span className="ml-1">
-                  {sortConfig.direction === 'ascending' ? '↑' : '↓'}
-                </span>
-              )}
-            </th>
-            <th className="p-2 border">Assigned To</th>
-            <th 
-              className="p-2 border cursor-pointer" 
-              onClick={() => handleSort('deadline')}
-            >
-              Deadline
-              {sortConfig.key === 'deadline' && (
-                <span className="ml-1">
-                  {sortConfig.direction === 'ascending' ? '↑' : '↓'}
-                </span>
-              )}
-            </th>
-            <th className="p-2 border">Status</th>
-            <th className="p-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredTasks.map(task => (
-            <tr key={task._id}>
-              <td className="p-2 border">{task.title}</td>
-              <td className="p-2 border">{task.assignedTo}</td>
-              <td className="p-2 border">{new Date(task.deadline).toLocaleDateString()}</td>
-              <td className="p-2 border">{task.status}</td>
-              <td className="p-2 border space-x-2">
-                <Link to={`/tasks/edit/${task._id}`} className="text-blue-600">Edit</Link>
-                <button onClick={() => deleteTask(task._id)} className="text-red-600">Delete</button>
-              </td>
+        <table className="w-full border text-sm">
+            <thead className="bg-gray-100">
+            <tr>
+                <th 
+                className="p-2 border cursor-pointer" 
+                onClick={() => handleSort('title')}
+                >
+                Title
+                {sortConfig.key === 'title' && (
+                    <span className="ml-1">
+                    {sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                    </span>
+                )}
+                </th>
+                <th className="p-2 border">Assigned To</th>
+                <th 
+                className="p-2 border cursor-pointer" 
+                onClick={() => handleSort('deadline')}
+                >
+                Deadline
+                {sortConfig.key === 'deadline' && (
+                    <span className="ml-1">
+                    {sortConfig.direction === 'ascending' ? '↑' : '↓'}
+                    </span>
+                )}
+                </th>
+                <th className="p-2 border">Status</th>
+                <th className="p-2 border">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+            </thead>
+            <tbody>
+            {filteredTasks.map(task => (
+                <tr key={task._id}>
+                <td className="p-2 border">{task.title}</td>
+                <td className="p-2 border">{task.assignedTo}</td>
+                <td className="p-2 border">{new Date(task.deadline).toLocaleDateString()}</td>
+                <td className="p-2 border">{task.status}</td>
+                <td className="p-2 border space-x-2">
+                    <Link to={`/tasks/edit/${task._id}`} className="text-blue-600">Edit</Link>
+                    <button onClick={() => deleteTask(task._id)} className="text-red-600">Delete</button>
+                </td>
+                </tr>
+            ))}
+            </tbody>
+        </table>
+        </div>
+    </>
   );
 };
 
