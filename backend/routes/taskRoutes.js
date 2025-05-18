@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const taskController = require('../controllers/taskController');
 const ensureAuth = require('../middlewares/authMiddleware');
+const pdfController = require('../controllers/pdfController');
+
+router.get('/report/pdf', ensureAuth, pdfController.generateTaskReport);
 
 // CRUD routes with ensuring authentication
 router.post('/', ensureAuth, taskController.createTask);
