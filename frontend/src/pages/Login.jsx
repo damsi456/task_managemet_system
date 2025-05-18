@@ -6,7 +6,7 @@ function Login() {
       {/* Use anchor instead of button with window.open */}
       <a 
         href="http://localhost:3000/auth/google"
-        className="bg-blue-600 text-white px-4 py-2 rounded inline-flex items-center justify-center"
+        className="text-center mt-10 text-4xl font-bold text-indigo-600"
       >
         Sign in with Google
       </a>

@@ -3,11 +3,9 @@ import Login from './pages/Login';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="text-center mt-10 text-4xl font-bold text-indigo-600">
+      ✅ Tailwind is working with Vite!
+    </div>
   );
 }
 
