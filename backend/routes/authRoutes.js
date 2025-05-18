@@ -28,8 +28,8 @@ router.get('/current-user', (req, res) => {
   res.send(req.user);
 });
 
-router.get('/test', (req, res) => {
-    res.send('Auth routes working!');
-});
+// router.get('/test', (req, res) => {
+//     res.send('Auth routes working!');
+// });
 
 module.exports = router;
