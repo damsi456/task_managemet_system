@@ -1,17 +1,21 @@
-function Login() {
+import React from 'react';
+
+const Login = () => {
+  const handleLogin = () => {
+    window.open('http://localhost:3000/auth/google', '_self');
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl mb-4">Login</h1>
-      
-      {/* Use anchor instead of button with window.open */}
-      <a 
-        href="http://localhost:3000/auth/google"
-        className="text-center mt-10 text-4xl font-bold text-indigo-600"
+    <div className="h-screen flex flex-col justify-center items-center">
+      <h1 className="text-3xl font-bold mb-4">Task Manager</h1>
+      <button
+        onClick={handleLogin}
+        className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
       >
         Sign in with Google
-      </a>
+      </button>
     </div>
   );
-}
+};
 
 export default Login;
