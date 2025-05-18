@@ -5,6 +5,7 @@ import TaskList from './pages/TaskList';
 import AddTask from './pages/AddTask';
 import EditTask from './pages/EditTask';
 import NotFound from './pages/NotFound';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Route path="/tasks" element={<TaskList />} />
       <Route path="/tasks/add" element={<AddTask />} />
       <Route path="/tasks/edit/:id" element={<EditTask />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
